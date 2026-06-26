@@ -3,6 +3,8 @@
 import numpy as np
 from numpy.typing import NDArray
 
+M1 = np.array([[1, 0], [-1, 1]])
+
 M2 = np.array([[1, 1, 0], [-2, 2, 0], [1, -2, 1]]) / 2
 
 M3 = np.array([[1, 4, 1, 0], [-3, 0, 3, 0], [3, -6, 3, 0], [-1, 3, -3, 1]]) / 6
