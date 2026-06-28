@@ -10,9 +10,15 @@ M2 = np.array([[1, 1, 0], [-2, 2, 0], [1, -2, 1]]) / 2
 M3 = np.array([[1, 4, 1, 0], [-3, 0, 3, 0], [3, -6, 3, 0], [-1, 3, -3, 1]]) / 6
 
 
+def powers_t(d: int, t: float):
+    """Power vector: [1, t, ... t^2]"""
+    exps = np.arange(d + 1, dtype=float)
+    return t**exps
+
+
 def powers(d: int, t: NDArray):
     """Power vector: [1, t, ... t^2]"""
-    exps = np.arange(d + 1)
+    exps = np.arange(d + 1, dtype=float)
     return t[..., None] ** exps[None, ...]
 
 
@@ -20,6 +26,11 @@ def segm_points(d: int, points: NDArray, i: int):
     """Points for a segment: C_(i-d)^n"""
     assert i >= d and i < len(points)
     return points[i - d : i + 1]
+
+
+def curve_t(d: int, M: NDArray, points: NDArray, t):
+    assert points.shape[0] == d + 1
+    return powers_t(d, t) @ M @ points
 
 
 def segm_curve(d: int, M: NDArray, points: NDArray, i: int, tt: NDArray):
